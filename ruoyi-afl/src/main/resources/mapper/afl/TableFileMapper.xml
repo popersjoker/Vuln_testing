@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.afl.mapper.TableFileMapper">
+
+    <resultMap type="TableFile" id="TableFileResult">
+        <result property="yid" column="yid"/>
+        <result property="fileName" column="file_name"/>
+        <result property="uploadTime" column="upload_time"/>
+        <result property="uploadUrl" column="upload_url"/>
+    </resultMap>
+
+    <sql id="selectTableFileVo">
+        select yid, file_name, upload_time, upload_url
+        from table_file
+    </sql>
+
+    <select id="selectTableFileList" parameterType="TableFile" resultMap="TableFileResult">
+        <include refid="selectTableFileVo"/>
+        <where>
+            <if test="fileName != null  and fileName != ''">and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="uploadTime != null ">and upload_time = #{uploadTime}</if>
+            <if test="uploadUrl != null  and uploadUrl != ''">and upload_url = #{uploadUrl}</if>
+        </where>
+    </select>
+
+    <select id="selectTableFileByYid" parameterType="Long" resultMap="TableFileResult">
+        <include refid="selectTableFileVo"/>
+        where yid = #{yid}
+    </select>
+
+
+    <!--by zyz: 2023-10-26  新写一条查询语句，用来查询table_file表中的yid，upload_time，upload_url三个字段
+    用于前端源代码处理中下方表格的数据显示-->
+    <sql id="selectTableFile3">
+        select yid, file_name, upload_time
+        from table_file
+    </sql>
+    <select id="select3TableFile" parameterType="TableFile" resultMap="TableFileResult">
+        <include refid="selectTableFile3"/>
+        <where>
+            <if test="fileName != null  and fileName != ''">and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="params.beginTime != null and params.beginTime != ''">
+                and date_format(upload_time,'%y%m%d') >= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                and date_format(upload_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+            <if test="uploadUrl != null  and uploadUrl != ''">and upload_url = #{uploadUrl}</if>
+        </where>
+    </select>
+
+    <insert id="insertTableFile" parameterType="TableFile" useGeneratedKeys="true" keyProperty="yid">
+        insert into table_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">file_name,</if>
+            <if test="uploadTime != null">upload_time,</if>
+            <if test="uploadUrl != null">upload_url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileName != null">#{fileName},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+            <if test="uploadUrl != null">#{uploadUrl},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTableFile" parameterType="TableFile">
+        update table_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+            <if test="uploadUrl != null">upload_url = #{uploadUrl},</if>
+        </trim>
+        where yid = #{yid}
+    </update>
+
+    <delete id="deleteTableFileByYid" parameterType="Long">
+        delete
+        from table_file
+        where yid = #{yid}
+    </delete>
+
+    <delete id="deleteTableFileByYids" parameterType="String">
+        delete from table_file where yid in
+        <foreach item="yid" collection="array" open="(" separator="," close=")">
+            #{yid}
+        </foreach>
+    </delete>
+</mapper>

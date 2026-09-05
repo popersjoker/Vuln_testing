@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.afl.mapper.TableInputFileMapper">
+    
+    <resultMap type="TableInputFile" id="TableInputFileResult">
+        <result property="uid"    column="uid"    />
+        <result property="inputFileName"    column="input_file_name"    />
+        <result property="uploadInputUrl"    column="upload_input_url"    />
+        <result property="yid"    column="yid"    />
+    </resultMap>
+
+    <sql id="selectTableInputFileVo">
+        select uid, input_file_name, upload_input_url, yid from table_upload
+    </sql>
+
+    <select id="selectTableInputFileList" parameterType="TableInputFile" resultMap="TableInputFileResult">
+        <include refid="selectTableInputFileVo"/>
+        <where>  
+            <if test="inputFileName != null  and inputFileName != ''"> and input_file_name like concat('%', #{inputFileName}, '%')</if>
+            <if test="uploadInputUrl != null  and uploadInputUrl != ''"> and upload_input_url = #{uploadInputUrl}</if>
+            <if test="yid != null "> and yid = #{yid}</if>
+        </where>
+    </select>
+    
+    <select id="selectTableInputFileByUid" parameterType="Long" resultMap="TableInputFileResult">
+        <include refid="selectTableInputFileVo"/>
+        where uid = #{uid}
+    </select>
+    <select id="selectByYid" parameterType="Long" resultMap="TableInputFileResult">
+        <include refid="selectTableInputFileVo"/>
+        where yid = #{yid}
+    </select>
+        
+    <insert id="insertTableInputFile" parameterType="TableInputFile" useGeneratedKeys="true" keyProperty="uid">
+        insert into table_upload
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="inputFileName != null">input_file_name,</if>
+            <if test="uploadInputUrl != null">upload_input_url,</if>
+            <if test="yid != null">yid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="inputFileName != null">#{inputFileName},</if>
+            <if test="uploadInputUrl != null">#{uploadInputUrl},</if>
+            <if test="yid != null">#{yid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTableInputFile" parameterType="TableInputFile">
+        update table_upload
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="inputFileName != null">input_file_name = #{inputFileName},</if>
+            <if test="uploadInputUrl != null">upload_input_url = #{uploadInputUrl},</if>
+            <if test="yid != null">yid = #{yid},</if>
+        </trim>
+        where uid = #{uid}
+    </update>
+
+    <update id="updateTableInputFileByYid" parameterType="TableInputFile">
+        update table_upload
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="inputFileName != null">input_file_name = #{inputFileName},</if>
+            <if test="uploadInputUrl != null">upload_input_url = #{uploadInputUrl},</if>
+            <if test="yid != null">yid = #{yid},</if>
+        </trim>
+        where yid = #{yid}
+    </update>
+
+    <delete id="deleteTableInputFileByUid" parameterType="Long">
+        delete from table_upload where uid = #{uid}
+    </delete>
+
+    <delete id="deleteTableInputFileByUids" parameterType="String">
+        delete from table_upload where uid in
+        <foreach item="uid" collection="array" open="(" separator="," close=")">
+            #{uid}
+        </foreach>
+    </delete>
+
+    <select id="selectTableInputFileByYid" parameterType="Long" resultType="boolean">
+        select count(*) > 0
+        from table_upload
+        where yid = #{yid}
+    </select>
+</mapper>

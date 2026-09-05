@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.afl.mapper.TableRecordMapper">
+
+    <resultMap type="TableRecord" id="TableRecordResult">
+        <id property="fid"    column="fid"    />
+        <result property="testTime"    column="test_time"    />
+        <result property="fuzzOutUrl"    column="fuzz_out_url"    />
+        <result property="yid"    column="yid"    />
+        <result property="cid"    column="cid"    />
+        <result property="uid"    column="uid"    />
+        <result property="uuid"    column="uuid"    />
+        <association property="tableFile" javaType="TableFile">
+            <id column="yid" property="yid"/>
+            <result column="file_name" property="fileName"/>
+            <result column="upload_time" property="uploadTime"/>
+            <result column="upload_url" property="uploadUrl"/>
+        </association>
+    </resultMap>
+
+    <sql id="selectTableRecordVo">
+        select fid, test_time, fuzz_out_url, yid, cid, uid, uuid from table_record
+    </sql>
+
+    <select id="selectTableRecordList" parameterType="TableRecord" resultMap="TableRecordResult">
+        select tr.fid,
+        tr.test_time,
+        tr.fuzz_out_url,
+        tr.yid,
+        tr.cid,
+        tr.uid,
+        tr.uuid,
+        tf.file_name
+            from table_record tr left join table_file tf on tr.yid = tf.yid
+        <where>
+
+            <if test="fuzzOutUrl != null  and fuzzOutUrl != ''">and fuzz_out_url = #{fuzzOutUrl}</if>
+            <if test="yid != null ">and tr.yid = #{yid}</if>
+            <if test="cid != null ">and cid = #{cid}</if>
+            <if test="uid != null ">and uid = #{uid}</if>
+            <if test="uuid != null  and uuid != ''">and uuid = #{uuid}</if>
+        </where>
+    </select>
+
+    <select id="selectTableRecordByFid" parameterType="Long" resultMap="TableRecordResult">
+        <include refid="selectTableRecordVo"/>
+        where fid = #{fid}
+    </select>
+
+    <select id="selectTableRecordByUuid" parameterType="String" resultMap="TableRecordResult">
+        <include refid="selectTableRecordVo"/>
+        where uuid = #{uuid}
+    </select>
+
+    <select id="selectTableRecordByYid" parameterType="Long" resultMap="TableRecordResult">
+        <include refid="selectTableRecordVo"/>
+        where yid = #{yid}
+    </select>
+
+    <insert id="insertTableRecord" parameterType="TableRecord" useGeneratedKeys="true" keyProperty="fid">
+        insert into table_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="testTime != null">test_time,</if>
+            <if test="fuzzOutUrl != null">fuzz_out_url,</if>
+            <if test="yid != null">yid,</if>
+            <if test="cid != null">cid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="uuid != null">uuid,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="testTime != null">#{testTime},</if>
+            <if test="fuzzOutUrl != null">#{fuzzOutUrl},</if>
+            <if test="yid != null">#{yid},</if>
+            <if test="cid != null">#{cid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="uuid != null">#{uuid},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTableRecord" parameterType="TableRecord">
+        update table_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="testTime != null">test_time = #{testTime},</if>
+            <if test="fuzzOutUrl != null">fuzz_out_url = #{fuzzOutUrl},</if>
+            <if test="yid != null">yid = #{yid},</if>
+            <if test="cid != null">cid = #{cid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="uuid != null">uuid = #{uuid},</if>
+        </trim>
+        where fid = #{fid}
+    </update>
+
+<!--    <update id="updateTableRecordByUuid" parameterType="TableRecord">-->
+<!--        update table_record-->
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="testTime != null">test_time = #{testTime},</if>-->
+<!--            <if test="fuzzOutUrl != null">fuzz_out_url = #{fuzzOutUrl},</if>-->
+<!--            <if test="yid != null">yid = #{yid},</if>-->
+<!--            <if test="cid != null">cid = #{cid},</if>-->
+<!--            <if test="uid != null">uid = #{uid},</if>-->
+<!--            <if test="uuid != null">uuid = #{uuid},</if>-->
+<!--        </trim>-->
+<!--        where uuid = #{uuid}-->
+<!--    </update>-->
+
+    <delete id="deleteTableRecordByFid" parameterType="Long">
+        delete from table_record where fid = #{fid}
+    </delete>
+
+    <delete id="deleteTableRecordByFids" parameterType="String">
+        delete from table_record where fid in
+        <foreach item="fid" collection="array" open="(" separator="," close=")">
+            #{fid}
+        </foreach>
+    </delete>
+</mapper>

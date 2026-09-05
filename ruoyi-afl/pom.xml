@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ruoyi</artifactId>
+        <groupId>com.ruoyi</groupId>
+        <version>3.8.6</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ruoyi-afl</artifactId>
+
+    <description>
+        afl模糊测试
+    </description>
+
+    <dependencies>
+        <!-- 通用工具-->
+<dependency>
+    <groupId>com.sun.corba</groupId>
+    <artifactId>glassfish-corba-omgapi</artifactId>
+    <version>3.0.1</version>
+</dependency>
+
+
+   <dependency>
+    <groupId>org.glassfish.main.javaee-api</groupId>
+    <artifactId>javax.jws</artifactId>
+    <version>3.1.2</version>
+</dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17</version> <!-- 根据实际情况选择版本 -->
+        </dependency>
+
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-common</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+
+</project>

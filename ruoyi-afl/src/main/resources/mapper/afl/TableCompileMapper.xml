@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.afl.mapper.TableCompileMapper">
+
+    <resultMap type="TableCompile" id="TableCompileResult">
+        <result property="cid"    column="cid"    />
+        <result property="compiledName"    column="compiled_name"    />
+        <result property="compiledUrl"    column="compiled_url"    />
+        <result property="yid"    column="yid"    />
+    </resultMap>
+
+    <sql id="selectTableCompileVo">
+        select cid, compiled_name, compiled_url, yid from table_compile
+    </sql>
+
+    <select id="selectTableCompileList" parameterType="TableCompile" resultMap="TableCompileResult">
+        <include refid="selectTableCompileVo"/>
+        <where>
+            <if test="compiledName != null  and compiledName != ''"> and compiled_name like concat('%', #{compiledName}, '%')</if>
+            <if test="compiledUrl != null  and compiledUrl != ''"> and compiled_url = #{compiledUrl}</if>
+            <if test="yid != null "> and yid = #{yid}</if>
+        </where>
+    </select>
+
+    <select id="selectTableCompileByCid" parameterType="Long" resultMap="TableCompileResult">
+        <include refid="selectTableCompileVo"/>
+        where cid = #{cid}
+    </select>
+
+    <select id="selectLatestTableCompileByYid" parameterType="Long" resultMap="TableCompileResult">
+        <include refid="selectTableCompileVo"/>
+        WHERE yid = #{yid}
+    </select>
+
+    <insert id="insertTableCompile" parameterType="TableCompile" useGeneratedKeys="true" keyProperty="cid">
+        insert into table_compile
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="compiledName != null and compiledName != ''">compiled_name,</if>
+            <if test="compiledUrl != null and compiledUrl != ''">compiled_url,</if>
+            <if test="yid != null">yid,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="compiledName != null and compiledName != ''">#{compiledName},</if>
+            <if test="compiledUrl != null and compiledUrl != ''">#{compiledUrl},</if>
+            <if test="yid != null">#{yid},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTableCompile" parameterType="TableCompile">
+        update table_compile
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="compiledName != null and compiledName != ''">compiled_name = #{compiledName},</if>
+            <if test="compiledUrl != null and compiledUrl != ''">compiled_url = #{compiledUrl},</if>
+            <if test="yid != null">yid = #{yid},</if>
+        </trim>
+        where cid = #{cid}
+    </update>
+<!--    这里有一个思路，要是我多次点击编译的话，每次都会给我生成一条记录，那么这个详情就没有意思，
+所以我想每次点击的时候，修改数据库中yid对应的这行数据更改编译文件名和编译路径，
+同时删除前次编译生成的目录及文件，这样实现应该更加合理-->
+    <update id="updateTableCompileByYid" parameterType="TableCompile">
+        update table_compile
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="compiledName !=null">compiled_name = #{compiledName},</if>
+            <if test="compiledUrl != null">compiled_url = #{compiledUrl},</if>
+        </trim>
+        where yid = #{yid}
+    </update>
+
+    <delete id="deleteTableCompileByCid" parameterType="Long">
+        delete from table_compile where cid = #{cid}
+    </delete>
+
+    <delete id="deleteTableCompileByCids" parameterType="String">
+        delete from table_compile where cid in
+        <foreach item="cid" collection="array" open="(" separator="," close=")">
+            #{cid}
+        </foreach>
+    </delete>
+
+    <select id="existsByYid" parameterType="Long" resultType="boolean">
+        select count(*) > 0
+        from table_compile
+        where yid = #{yid}
+        </select>
+</mapper>
