@@ -1,0 +1,170 @@
+网络安全，恶意代码，图像处理，深度学习,金融科技
+登录国外注册虚拟电话号码的网站：sms-activate.org/  账户与谷歌账户同步  剩余卢布：167.67 购买虚拟号码由于接收短信验证码
+steam账号：zhengyanzhe14  密码：qq2530204417
+教务系统账号：4032332416 密码：Qq2530204417@
+
+postman账号  yanzhezheng pwd: qq2530204417
+
+英伟达账户密码：4uEr5vSwxJgBYk:  qq邮箱 2530204417@qq.com
+账户zhengyanzhe14@gmail.com
+Google邮箱：zhengyanzhe14@gmail.com  pwd:qq2530204417-  同时是chatgpt的账户
+	    xiaoting5182024@gmail.com  pwd:qq2530204417-  同时是chatgpt的账户
+            sjiahui608@gmail.com pwd:111aaa@@@  同时是chatgpt的账户
+            sunjiahui706@gmail.com pwd:111aaa@@@ not successful
+	
+gitee账户：2530204417@qq.com 密码：qq2530204417   同时也是git的username 和  password 
+github账户：2530204417@qq.com 密码：qq2530204417    经常密码错误？
+
+Hugging Face账户：密码：!ffgAnHSYzC4-Sd 用户邮箱：zhengyanzhe14@gmail.com
+
+节点账号：2530204417@qq.com  密码：qq2530204417
+
+bjavd：2532856882 123456
+
+第二个wx号：ilikeygt 密码 qq2530204417 
+GhostCut 123456 123456 2530204417@qq.com
+
+Discord账号： 2530204417@qq.com  Qq2530204417
+
+
+华为杯账号： 15002431236  密码Qq2530204417
+
+蓝奏云：15002431236 123456
+stablediffusion：2530204417@qq.com  Qq2530204417
+
+appleID 15002431236  Qq2530204417
+
+ikuuu.one VPN: 账户：zhengyanzhe14@gmail.com   密码：Qq2530204417-
+
+
+任务：安装jdk17
+重新配置springboot-spring--3.14  successful  安装了idea2023  运行成功入门程序
+
+任务：安装nodejs npm  vue/cli  vue2
+
+任务：使用git命令 ：  
+git init  创建.git
+git remote add origin url  添加远程仓库链接
+git add file(s) 添加文件到暂存区，此时文件处于git可跟踪的状态
+新建一个.gitignore  里面写入.iml , .idea. node_modules等不需要提交的文件
+git commit -m "提交消息的字符串"      提交暂存区的文件到本地仓库
+git push -u origin master  推送本地仓库的内容到远程仓库  origin是远程仓库 ， master是分支名
+git status查看文件状态
+
+git remote -v查看远程仓库列表
+
+D:\>git remote -v
+origin  https://gitee.com/zyz123458/honey2024.git (fetch)
+origin  https://gitee.com/zyz123458/honey2024.git (push)
+
+
+C:\Users\xieyao\IdeaProjects\useless  ----显示一个棋盘图片的源码路径  画一个中国象棋棋盘 国际象棋棋盘
+
+
+
+h5 css3 js vue语法 git element-ui springboot http扫盲  
+mybatis实现crud  vue+后台封装  JWT token权限验证 文件上传下载  多角色登录  重置密码  
+crud  excel导入和导出  服务器部署上线  富文本编辑器  系统公告
+ 
+
+
+RestMapping
+RequestMapping
+
+状态码 status code 200 401 404 500
+请求格式 get post put delete
+
+
+建表：
+CREATE TABLE `user`(
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+	`password` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
+	`name` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '姓名',
+	`phone` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '电话',
+	`email` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+	`address` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '地址',
+	`avatar` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
+	PRIMARY KEY(`id`)
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表';
+
+
+2023 10 8
+Controller层 有区别  
+Service层 最后分页查询处有疑惑
+Mapper层  SQL语句 不常用
+
+
+作业 ： 弄懂hashmap map T 泛型数据
+
+学习计划：  周六 演讲准备 继续背 数学  数据库  看博弈程序
+	   周日 数学 数据库  继续背演讲	 看博弈程序
+	   项目流程熟悉
+   
+下周准备社会实践报告   数据库专题和面向对象程序设计
+ 
+
+2023.10.23
+-- 源码文件信息表--
+DROP TABLE IF EXISTS `table_file`;
+CREATE TABLE `table_file`(
+	`yid` int(0) NOT NULL AUTO_INCREMENT COMMENT '源码文件id',
+	`file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '源码文件名',
+	`upload_time` datetime(0) NOT NULL COMMENT '上传时间',
+	`upload_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '源码文件上传位置',
+	PRIMARY KEY(`yid`) 
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='源码文件信息表';	
+
+
+
+-- 编译记录表--
+DROP TABLE IF EXISTS `table_compile`;
+CREATE TABLE `table_compile`(
+	`cid` int(0) NOT NULL AUTO_INCREMENT COMMENT '编译文件id',
+	`compiled_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '编译文件名',
+	`compiled_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '编译文件路径',
+	`yid` int(0) NOT NULL COMMENT '源码文件id',
+	PRIMARY KEY(`cid`),
+	FOREIGN KEY(`yid`) REFERENCES `table_file` (`yid`) ON DELETE CASCADE
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='编译记录表';
+	
+
+
+-- 输入文件上传记录表--
+DROP TABLE IF EXISTS `table_upload`;
+CREATE TABLE `table_upload`(
+	`uid` int(0) NOT NULL AUTO_INCREMENT COMMENT '输入文件id',
+	`input_file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '输入文件名',
+	`upload_input_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '上传输入文件路径',
+	`yid` int(0) NOT NULL COMMENT '源码文件id',
+	PRIMARY KEY(`uid`) USING BTREE,	
+	INDEX `FK_file`(`yid`)USING BTREE,
+	CONSTRAINT `FK_file` FOREIGN KEY(`yid`)REFERENCES `table_file` (`yid`)ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='输入文件上传记录表';
+
+
+
+-- 测试记录表--
+DROP TABLE IF EXISTS `table_record`;
+CREATE TABLE `table_record`(
+	`fid` int(0) NOT NULL AUTO_INCREMENT COMMENT '模糊测试记录id',
+	`test_time` datetime(0) NULL DEFAULT NULL COMMENT '测试时间',
+	`fuzz_out_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '输出文件url',
+	`yid` int(0) NOT NULL COMMENT '源码文件id',
+	`cid` int(0) NOT NULL COMMENT '编译文件id',
+	`uid` int(0) NOT NULL COMMENT '输入文件id',
+	`uuid` varchar(255)CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '唯一识别标识',
+	PRIMARY KEY(`fid`),
+	FOREIGN KEY(`yid`) REFERENCES `table_file` (`yid`)  ON DELETE CASCADE,
+	FOREIGN KEY(`cid`) REFERENCES `table_compile` (`cid`) ON DELETE CASCADE,
+	FOREIGN KEY(`uid`) REFERENCES `table_upload` (`uid`)
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='测试记录表';   
+ 
+2023.10.24任务：
+做出上传文件的功能，然后在下方数据表中显示出文件的名字，序号，以及对应字段应该生成的文字（插桩编译，详情），（上传输入，详情），（查看源码），（修改，删除），（模糊测试）
+
+进度条：2023/10/24/16：05：做了一个选择源码文件的弹窗，同时弹窗内的表单目前可以浏览文件并对文件格式加以限制。
+下一步，记录文件的名称和上传url到数据库。
+
+https://edu.aliyun.com/certification/这有个认证还没做，找个时间把这个东西考了 价值1200元 ACA 阿里云大数据助理工程师ACA认证（Alibaba Cloud Certified Associate - Big Data）
+
